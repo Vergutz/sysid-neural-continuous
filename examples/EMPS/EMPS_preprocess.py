@@ -34,8 +34,8 @@ if __name__ == '__main__':
     np.random.seed(0)
     torch.manual_seed(0)
 
-    #DATASET = "DATA_EMPS"
-    DATASET = "DATA_EMPS_PULSES"
+    DATASET = "DATA_EMPS"
+    # DATASET = "DATA_EMPS_PULSES"
 
     SCALE_POS = True # If True, scale the dataset
     DECIMATE = 5  # Decimate data by a factor DECIMATE
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
     # In[Load dataset]
 
-    emps_data = sp.io.loadmat(os.path.join("data", DATASET + ".mat"))
+    emps_data = sp.io.loadmat(os.path.join("./examples/EMPS/data", DATASET + ".mat"))
     q_ref = emps_data['qg'].astype(np.float32)
     q_meas = emps_data['qm'].astype(np.float32)
     u_in = emps_data['vir'].astype(np.float32)
@@ -63,6 +63,7 @@ if __name__ == '__main__':
 
     # In[Compute velocity and acceleration]
     ts_orig = np.mean(np.diff(time_exp.ravel())) #time_exp[1] - time_exp[0]
+    # In[Compute velocity and acceleration]
     if DIFF_FILTER:
         # Design a differentiator filter to estimate unmeasured velocities from noisy, measured positions
         fs = 1 / ts_orig       # Sample rate, Hz

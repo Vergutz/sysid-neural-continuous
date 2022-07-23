@@ -30,12 +30,12 @@ if __name__ == '__main__':
     test_freq = 100  # print message every test_freq iterations
 
     # In[Load dataset]
-    df_data = pd.read_csv(os.path.join("data", "DATA_EMPS_SC.csv"))
-    time_exp = np.array(df_data[["time_exp"]]).astype(np.float32)
-    q_ref = np.array(df_data[["q_ref"]]).astype(np.float32)
-    q_meas = np.array(df_data[["q_meas"]]).astype(np.float32)
-    v_est = np.array(df_data[["v_est"]]).astype(np.float32)
-    u_in = np.array(df_data[["u_in"]]).astype(np.float32)
+    df_data = pd.read_csv(os.path.join("./examples/EMPS/data", "DATA_EMPS_SC.csv"))
+    time_exp = np.array(df_data[["time_exp"]]).astype(np.float32) # T - Time
+    q_ref = np.array(df_data[["q_ref"]]).astype(np.float32) # QG - reference position
+    q_meas = np.array(df_data[["q_meas"]]).astype(np.float32) # QM - output Position
+    v_est = np.array(df_data[["v_est"]]).astype(np.float32) # (diff of q_meas)/(mean diff of time_exp)
+    u_in = np.array(df_data[["u_in"]]).astype(np.float32) # VIR - input Force
     ts = np.mean(np.diff(time_exp.ravel()))  #time_exp[1] - time_exp[0]
 
     # In[Init hidden state]
